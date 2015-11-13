@@ -1,21 +1,35 @@
-#include <cmath>
 #include <iostream>
 #include <cstdlib>
 
 using namespace std;
-//--------------------------------------------------
-// plenty of lines here
-//--------------------------------------------------
+
+void add_rand(double* x, const int N){
+	for(int i = 0; i<N; i++)
+		x[i] = rand()/(double)RAND_MAX; 
+} 
+
+void calc_mean(double* x, const int N, double& m, double& v){
+	
+	double sum=0, sumsqr=0;
+	for(int i = 0; i<N; i++)
+		sum += x[i];
+	m = sum / N;
+	
+	for(int i = 0; i<N; i++)
+		sumsqr += (x[i]-m)*(x[i]-m);
+	v = sumsqr / N;
+} 
 
 int main(){
-   const int N = 100;
-   double p[N];
-   double mean, var;
+   srand(time(NULL));
+	const int N = 100;
+	double x[N];
+	double v, m;
+	
+	add_rand(x, N);
+	calc_mean(x, N, m, v);
 
-   // Some lines here....
+	cout << "mean=" << m << "\tvar=" << v << endl;
 
-   cout << "Mean = " << mean << endl;
-   cout << "Variance = " << var << endl;
-
-   return 0;
+	return 0;
 }
